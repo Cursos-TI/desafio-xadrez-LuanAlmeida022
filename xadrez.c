@@ -1,53 +1,80 @@
 #include <stdio.h>
 
-int main() {
-    int i, j ;
+void moverTorre(int casas){
+  if(casas > 0 ) {
+    printf("Direita\n");
+    moverTorre(casas - 1);
 
-    // Movimentação da torre (5 casas para direita)
-    printf("Movimentação da Torre:\n");
-    
-    for (i = 0; i < 5; i++) {   
-        printf("Direita\n");
     }
-     printf("\n");
+}
 
-    // Movimentação da rainha (8 casas para a esquerda)
-    printf("Movimentação da Rainha:\n");
-   
-    i = 0; // reinicia o contador
-    while (i < 8) {
+void moverRainha(int casas){
+
+    if(casas > 0){
         printf("Esquerda\n");
-        i++;
+        moverRainha(casas - 1);
     }
+}
+
+void moverBispo(int casas) {
+    if (casas <= 0) return;
+
+    // Loop externo (vertical)
+    for (int i = 0; i < 1; i++) {
+        // Loop interno (horizontal)
+        for (int j = 0; j < 1; j++) {
+            printf("Cima Direita\n");
+        }
+    }
+
+    // Chamada recursiva para a próxima casa
+    moverBispo(casas - 1);
+}
+int main (){
+// Quantidades fixas
+    const int casasTorre = 5;
+    const int casasRainha = 8;
+    const int casasBispo = 5;
+  
+    //Movimento da Torre 5 casas para a direita.
+    printf("Movimentação da Torre:\n");
+    moverTorre(casasTorre);
+    printf("\n");
+   
+    //Movimento da Rainha 8 casas para a esquerda.
+    printf("Movimentação da Rainha:\n");
+    moverRainha(casasRainha);
     printf("\n");
 
-    // Movimentação do bispo( 5 casas na diagonal para cima e à direita)
+    //Movimento do Bispo 5 casas na diagonal para cima e à direita.
     printf("Movimentação do Bispo:\n");
+    moverBispo(casasBispo);
+    printf("\n");
 
-     i = 0; 
-    do {
-      printf("Cima Direita\n");
-      i++;
 
-    }while (i < 5);
-      printf("\n");
-      
-   //Movimentação do Cavalo( 2 casas para baixo e 1 casa para a esquerda)   
-    int casasParaBaixo = 2;
-    int casasParaEsquerda = 1;
+   //Movimentação do Cavalo( 2 casas para cima e 1 casa para a direita)   
+    int casasParaCima = 2;
+    int casasParaDireita = 1;
+    
     printf("Movimentação do Cavalo:\n");
 
-    for (i = 0; i < casasParaBaixo; i++) {   // Loop externo para as casas para baixo
-        printf("Baixo\n");
+    for ( int i = 0; i < casasParaCima; i++) {   // Loop externo para as casas para cima
+        printf("Cima\n");
 
+        if( i < casasParaCima-1){
+            continue;
+        }
         
-        j = 0;
-        while (i == casasParaBaixo - 1 && j < casasParaEsquerda) { // Loop interno para casas para a esquerda, só ocorre após a última casa para baixo
-            printf("Esquerda\n");
+      int  j = 0;
+        while (i == casasParaCima - 1 && j < casasParaDireita) { // Loop interno para casas para a direita, só ocorre após a última casa para cima
+            printf("Direita\n");
             j++;
+
+            break;
         }
     }
     printf("\n");
 
     return 0;
 }
+ 
